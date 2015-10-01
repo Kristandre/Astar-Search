@@ -30,7 +30,7 @@ public class Astar {
             }
             open.remove(current);
             closed.add(current);
-            for (int i = 0; i < 9; i++) {
+            for (int i = 1; i < 9; i+=2) {
                 if (i == 4) continue;
                 int x = current.getX();
                 int y = current.getY();
@@ -38,11 +38,12 @@ public class Astar {
                 int yi = (i / 3) -1;
                 int nextX = x + xi;
                 int nextY = y + yi;
+                System.out.println("i= "+i+", xi= " +xi+", yi= "+yi);
                 if(map.getCostAt(nextX,nextY)>0){
                     double gCost = current.getgCost() + distanceCost(x,y,nextX,nextY, map);
                     double hCost = distance(nextX,nextY,xGoal,yGoal);
                     Node node = new Node(current,nextX,nextY,gCost,hCost);
-                    if(coordInList(closed, nextX, nextY) && gCost >= current.getgCost() ) continue;
+                    if(coordInList(closed, nextX, nextY) && gCost+hCost >= current.getfCost() ) continue;
                     if(!coordInList(open, nextX, nextY)) open.add(node);
                 }
 

@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.List;
 
 public class Node {
 
@@ -15,7 +16,12 @@ public class Node {
         this.fCost = gCost + hCost;
     }
 
-
+    public boolean coordInList(List<Node> list, int x, int y){
+        for(Node n:list){
+            if(n.getX() == x && n.getY() == y) return true;
+        }
+        return false;
+    }
 
     public Node getParent() {
         return parent;
