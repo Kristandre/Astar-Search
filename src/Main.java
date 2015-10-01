@@ -4,12 +4,13 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Map map = new Map("boards/board-1-4.txt");
+        //Select map
+        Map map = new Map("boards/board-1-1.txt");
         Astar aStar = new Astar();
-        List<Node> path = aStar.findPath(map);
-        List<String> lines = map.mapLines;
-        List<String> newMap = new ArrayList<String>();
-        MapRenderer mr = new MapRenderer(lines, path);
+        //Select "a*", "bfs" or "dijkstra" algorithm
+        List<List<Node>> result = aStar.findPath(map, "dijkstra");
+        //Render the result. True if you want to see the open and closed lists. Open = Yellow squared, closed = pink squares
+        MapRenderer mr = new MapRenderer(map.mapLines, result, true);
         mr.render();
     }
 
